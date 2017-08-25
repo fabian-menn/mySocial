@@ -16,7 +16,7 @@ class FancyField: UITextField {
         layer.borderColor = UIColor(red: SHADOW_GRAY, green: SHADOW_GRAY, blue: SHADOW_GRAY, alpha: 0.2).cgColor
         layer.borderWidth = 1
         
-        layer.cornerRadius = 2
+        layer.cornerRadius = 4
         
     }
     

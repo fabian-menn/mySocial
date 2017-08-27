@@ -31,12 +31,14 @@ class Post {
         return _postId
     }
     
+    // creating new post
     init(caption: String, imageUrl: String, likes: Int) {
         self._caption = caption
         self._imageUrl = imageUrl
         self._likes = likes
     }
     
+    // getting old post
     init(postId: String, postData: Dictionary<String, Any>) {
         self._postId = postId
         

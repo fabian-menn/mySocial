@@ -21,6 +21,11 @@ class PostCellTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    func configureCell(post: Post) {
+        self.caption.text = post.caption
+        self.likesLbl.text = "\(post.likes)"
+
+    }
     
 
 }

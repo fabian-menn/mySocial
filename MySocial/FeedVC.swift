@@ -14,6 +14,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var posts = [Post]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +24,17 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
             print(snapshot.value)
-            
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    print("snaap: \(snap)")
+                    if let postDict = snap.value as? Dictionary<String, Any> {
+                        let postId = snap.key
+                        let post = Post(postId: postId, postData: postDict)
+                        self.posts.append(post)
+                    }
+                }
+            }
+            self.tableView.reloadData()
         })
     }
     
@@ -35,10 +47,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return posts.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let post = posts[indexPath.row]
+        print("FABIAN: \(post.caption)")
+        
         return tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCellTableViewCell
     }
     
@@ -48,7 +64,5 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         try! Auth.auth().signOut()
         performSegue(withIdentifier: "toSignInVC", sender: nil)
     }
-    
-    
 
 }

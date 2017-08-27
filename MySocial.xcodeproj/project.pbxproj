@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		050F38561F5351510058C72D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F38551F5351510058C72D /* DataService.swift */; };
+		050F38581F5363C40058C72D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F38571F5363C40058C72D /* Post.swift */; };
 		0544408D1F52B8730023A383 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544408C1F52B8730023A383 /* CircleView.swift */; };
 		0544408F1F52D0F60023A383 /* PostCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544408E1F52D0F60023A383 /* PostCellTableViewCell.swift */; };
 		05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7251F5068220083C889 /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		050F38551F5351510058C72D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		050F38571F5363C40058C72D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0544408C1F52B8730023A383 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0544408E1F52D0F60023A383 /* PostCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellTableViewCell.swift; sourceTree = "<group>"; };
 		05F2A7221F5068220083C889 /* MySocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 		05F2A7391F506A6D0083C889 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				050F38571F5363C40058C72D /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				0544408D1F52B8730023A383 /* CircleView.swift in Sources */,
 				05F2A7441F5081170083C889 /* FancyField.swift in Sources */,
 				05F2A7481F50ABD80083C889 /* FeedVC.swift in Sources */,
+				050F38581F5363C40058C72D /* Post.swift in Sources */,
 				0544408F1F52D0F60023A383 /* PostCellTableViewCell.swift in Sources */,
 				05F2A7281F5068220083C889 /* SignInVC.swift in Sources */,
 				050F38561F5351510058C72D /* DataService.swift in Sources */,

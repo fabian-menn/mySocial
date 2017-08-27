@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050F38561F5351510058C72D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050F38551F5351510058C72D /* DataService.swift */; };
 		0544408D1F52B8730023A383 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544408C1F52B8730023A383 /* CircleView.swift */; };
 		0544408F1F52D0F60023A383 /* PostCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544408E1F52D0F60023A383 /* PostCellTableViewCell.swift */; };
 		05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7251F5068220083C889 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050F38551F5351510058C72D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		0544408C1F52B8730023A383 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		0544408E1F52D0F60023A383 /* PostCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellTableViewCell.swift; sourceTree = "<group>"; };
 		05F2A7221F5068220083C889 /* MySocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050F38541F53513C0058C72D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				050F38551F5351510058C72D /* DataService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		05F2A7191F5068220083C889 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 		05F2A7241F5068220083C889 /* MySocial */ = {
 			isa = PBXGroup;
 			children = (
+				050F38541F53513C0058C72D /* Services */,
 				05F2A73E1F507D150083C889 /* Util */,
 				05F2A7391F506A6D0083C889 /* Model */,
 				05F2A73B1F506A800083C889 /* View */,
@@ -297,6 +308,7 @@
 				05F2A7481F50ABD80083C889 /* FeedVC.swift in Sources */,
 				0544408F1F52D0F60023A383 /* PostCellTableViewCell.swift in Sources */,
 				05F2A7281F5068220083C889 /* SignInVC.swift in Sources */,
+				050F38561F5351510058C72D /* DataService.swift in Sources */,
 				05F2A7421F507EBA0083C889 /* RoundBtn.swift in Sources */,
 				05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */,
 				05F2A73D1F507CBA0083C889 /* FancyView.swift in Sources */,

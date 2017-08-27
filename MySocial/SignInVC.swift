@@ -20,9 +20,12 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -57,7 +60,8 @@ class SignInVC: UIViewController {
             } else {
                 print("FABIAN: .... Successfully authenticated with Firebase")
                 if let user = user {
-                    self.completeSignIn(id: user.uid)
+                    let userData = ["provider": credential.provider]
+                    self.completeSignIn(id: user.uid, userData: userData)
                 }
             }
         }
@@ -70,7 +74,8 @@ class SignInVC: UIViewController {
                 if error == nil {
                     print("FABIAN: Email User authenticated with Firebase")
                     if let user = user {
-                        self.completeSignIn(id: user.uid)
+                        let userData = ["provider": user.providerID]
+                        self.completeSignIn(id: user.uid, userData: userData)
                     }
                 } else {
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -79,7 +84,8 @@ class SignInVC: UIViewController {
                         } else {
                             print("FABIAN: Successfully authenticated with Firebase using email")
                             if let user = user {
-                                self.completeSignIn(id: user.uid)
+                                let userData = ["provider": user.providerID]
+                                self.completeSignIn(id: user.uid, userData: userData)
                             }
                         }
                     })
@@ -88,7 +94,8 @@ class SignInVC: UIViewController {
         }
     }
 
-    func completeSignIn(id: String) {
+    func completeSignIn(id: String, userData: Dictionary<String, String>) {
+        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("FABIAN: Data saved to keychain... \(keychainResult)")
         performSegue(withIdentifier: "toFeedVC", sender: nil)

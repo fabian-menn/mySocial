@@ -21,6 +21,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

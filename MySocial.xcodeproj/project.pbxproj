@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0544408D1F52B8730023A383 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544408C1F52B8730023A383 /* CircleView.swift */; };
 		05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7251F5068220083C889 /* AppDelegate.swift */; };
 		05F2A7281F5068220083C889 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7271F5068220083C889 /* SignInVC.swift */; };
 		05F2A72B1F5068220083C889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05F2A7291F5068220083C889 /* Main.storyboard */; };
@@ -18,10 +19,12 @@
 		05F2A7421F507EBA0083C889 /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7411F507EBA0083C889 /* RoundBtn.swift */; };
 		05F2A7441F5081170083C889 /* FancyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7431F5081170083C889 /* FancyField.swift */; };
 		05F2A7461F5082020083C889 /* FancyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7451F5082020083C889 /* FancyBtn.swift */; };
+		05F2A7481F50ABD80083C889 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7471F50ABD80083C889 /* FeedVC.swift */; };
 		FEAF963BDF122D1FA239B81B /* Pods_MySocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6771E43D60F99E6518A8A8D /* Pods_MySocial.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0544408C1F52B8730023A383 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		05F2A7221F5068220083C889 /* MySocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F2A7251F5068220083C889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05F2A7271F5068220083C889 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		05F2A7411F507EBA0083C889 /* RoundBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
 		05F2A7431F5081170083C889 /* FancyField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyField.swift; sourceTree = "<group>"; };
 		05F2A7451F5082020083C889 /* FancyBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
+		05F2A7471F50ABD80083C889 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		C8B232E34C96D12ECFA6A286 /* Pods-MySocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MySocial/Pods-MySocial.debug.xcconfig"; sourceTree = "<group>"; };
 		D6771E43D60F99E6518A8A8D /* Pods_MySocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MySocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E102668C37737EA7DCB846E4 /* Pods-MySocial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MySocial.release.xcconfig"; path = "Pods/Target Support Files/Pods-MySocial/Pods-MySocial.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				05F2A7271F5068220083C889 /* SignInVC.swift */,
+				05F2A7471F50ABD80083C889 /* FeedVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 				05F2A7411F507EBA0083C889 /* RoundBtn.swift */,
 				05F2A7431F5081170083C889 /* FancyField.swift */,
 				05F2A7451F5082020083C889 /* FancyBtn.swift */,
+				0544408C1F52B8730023A383 /* CircleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -266,6 +273,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -281,7 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0544408D1F52B8730023A383 /* CircleView.swift in Sources */,
 				05F2A7441F5081170083C889 /* FancyField.swift in Sources */,
+				05F2A7481F50ABD80083C889 /* FeedVC.swift in Sources */,
 				05F2A7281F5068220083C889 /* SignInVC.swift in Sources */,
 				05F2A7421F507EBA0083C889 /* RoundBtn.swift in Sources */,
 				05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */,

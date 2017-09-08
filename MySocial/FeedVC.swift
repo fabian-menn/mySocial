@@ -15,6 +15,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var captionField: FancyField!
     @IBOutlet weak var imageAdd: CircleView!
+
     
     var posts = [Post]()
 
@@ -33,7 +34,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker.delegate = self
         
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
-            print(snapshot.value)
+            //print(snapshot.value)
+            
+            self.posts = []
+            
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
                     //print("snaap: \(snap)")
@@ -70,12 +74,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             
             if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
                 cell.configureCell(post: post, img: img)
-                return cell
             } else {
                 cell.configureCell(post: post)
-                return cell
             }
-            
+            return cell
             
         }
         
@@ -103,6 +105,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         }
         
         guard let img = imageAdd.image, imageSelected == true else {
+            let alert = UIAlertController(title: "Error", message: "No image selected", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             print("FABIAN: An image must be selected")
             return
         }

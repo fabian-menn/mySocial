@@ -56,6 +56,7 @@ class SignInVC: UIViewController {
     func firebaseAuth(_ credential: AuthCredential) {
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
+                
                 print("FABIAN: ..... Unable to authenticate with Firebase - \(error)")
             } else {
                 print("FABIAN: .... Successfully authenticated with Firebase")
@@ -80,7 +81,20 @@ class SignInVC: UIViewController {
                 } else {
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
+                            if error.debugDescription.contains("The password must be 6 characters long") {
+                                let alert = UIAlertController(title: "Incorrect Login", message: "Password should be at least 6 characters long", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                            } else {
+                                let alert = UIAlertController(title: "Incorrect Login", message: "You entered the wrong password", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            
                             print("FABIAN: Unable to authenticate with Firebase using email")
+                            print("FABIAN: \(error)")
+                            // schau dir die Fehlermeldungen nochmal an
+                            
                         } else {
                             print("FABIAN: Successfully authenticated with Firebase using email")
                             if let user = user {

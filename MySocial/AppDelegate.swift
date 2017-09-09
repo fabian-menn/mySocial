@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,11 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
+        
         FirebaseApp.configure()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         IQKeyboardManager.sharedManager().enable = true
+        
+        // set initial view controller
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            var feedVC: FeedVC = mainStoryboard.instantiateViewController(withIdentifier: "FeedVC") as! FeedVC
+            self.window?.rootViewController = feedVC
+            self.window?.makeKeyAndVisible()
+        } else {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            var signInVC: SignInVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInVC") as! SignInVC
+            self.window?.rootViewController = signInVC
+            self.window?.makeKeyAndVisible()
+
+        }
+        
+        
         
         return true
     }

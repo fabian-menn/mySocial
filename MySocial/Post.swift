@@ -12,6 +12,8 @@ import Firebase
 class Post {
     
     private var _caption: String!
+    private var _userId: String!
+    private var _userImgUrl: String!
     private var _imageUrl: String!
     private var _likes: Int!
     private var _postId: String!
@@ -19,6 +21,14 @@ class Post {
     
     var caption: String {
         return _caption
+    }
+    
+    var userId: String {
+        return _userId
+    }
+    
+    var userImgUrl: String {
+        return _userImgUrl
     }
     
     var imageUrl: String {
@@ -34,10 +44,12 @@ class Post {
     }
     
     // creating new post
-    init(caption: String, imageUrl: String, likes: Int) {
+    init(caption: String, userid: String, userImgUrl: String, imageUrl: String, likes: Int) {
         self._caption = caption
         self._imageUrl = imageUrl
         self._likes = likes
+        self._userId = userid
+        self._userImgUrl = userImgUrl
     }
     
     // getting old post
@@ -46,6 +58,14 @@ class Post {
         
         if let caption = postData["caption"] as? String{
             self._caption = caption
+        }
+        
+        if let userId = postData["userId"] as? String {
+            self._userId = userId
+        }
+        
+        if let userImgUrl = postData["userImgUrl"] as? String {
+            self._userImgUrl = userImgUrl
         }
         
         if let imageUrl = postData["imageUrl"] as? String{

@@ -40,7 +40,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
-                    //print("snaap: \(snap)")
+                    print("snaap: \(snap)")
                     if let postDict = snap.value as? Dictionary<String, Any> {
                         let postId = snap.key
                         let post = Post(postId: postId, postData: postDict)
@@ -50,10 +50,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
             }
             self.tableView.reloadData()
         })
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,13 +69,15 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCellTableViewCell {
             
-            
-            if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
-                cell.configureCell(post: post, img: img)
-            } else {
-                cell.configureCell(post: post)
+            if let userImg = ProfileConfigVC.imageCache.object(forKey: post.userImgUrl as NSString) {
+                print("FABIAN: profile image url \(post.userImgUrl)")
+                if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
+                    cell.configureCell(post: post, postPic: img, profilePic: userImg)
+                } else {
+                    cell.configureCell(post: post)
+                }
+                return cell
             }
-            return cell
             
         }
         
@@ -101,11 +101,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     @IBAction func postBtnTapped(_ sender: Any) {
         guard let caption = captionField.text, caption != "" else {
             print("FABIAN: Caption must be entered")
+            let alert = UIAlertController(title: "Incorrect Post", message: "Caption must be entered", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             return
         }
         
         guard let img = imageAdd.image, imageSelected == true else {
-            let alert = UIAlertController(title: "Error", message: "No image selected", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Incorrect Post", message: "No image selected", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Try again", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             print("FABIAN: An image must be selected")
@@ -136,7 +139,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     func postToFirebase(imgUrl: String) {
-        let post: Dictionary<String, Any> = ["caption": captionField.text, "imageUrl": imgUrl, "likes":0]
+        let post: Dictionary<String, Any> = ["caption": captionField.text, "userId": KeychainWrapper.standard.string(forKey: KEY_UID), "imageUrl": imgUrl, "likes":0]
         
         let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
         firebasePost.setValue(post)

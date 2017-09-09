@@ -28,6 +28,8 @@
 		05569AF21F5C7001000147B0 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05569AE01F5C7001000147B0 /* IQToolbar.swift */; };
 		05569AF31F5C7001000147B0 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05569AE11F5C7001000147B0 /* IQUIView+IQKeyboardToolbar.swift */; };
 		05569AF41F5C7001000147B0 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 05569AE31F5C7001000147B0 /* IQKeyboardManager.bundle */; };
+		057B10CA1F64072C0054BCAB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B10C91F64072C0054BCAB /* ListView.swift */; };
+		05D480621F63DD4700E16E6D /* ProfileConfigVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D480611F63DD4700E16E6D /* ProfileConfigVC.swift */; };
 		05F2A7261F5068220083C889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7251F5068220083C889 /* AppDelegate.swift */; };
 		05F2A7281F5068220083C889 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F2A7271F5068220083C889 /* SignInVC.swift */; };
 		05F2A72B1F5068220083C889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05F2A7291F5068220083C889 /* Main.storyboard */; };
@@ -66,7 +68,9 @@
 		05569AE01F5C7001000147B0 /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		05569AE11F5C7001000147B0 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		05569AE31F5C7001000147B0 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		057B10C91F64072C0054BCAB /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		05922A871F633B05003AA597 /* MySocial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MySocial.entitlements; sourceTree = "<group>"; };
+		05D480611F63DD4700E16E6D /* ProfileConfigVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileConfigVC.swift; sourceTree = "<group>"; };
 		05F2A7221F5068220083C889 /* MySocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F2A7251F5068220083C889 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05F2A7271F5068220083C889 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			children = (
 				05F2A7271F5068220083C889 /* SignInVC.swift */,
 				05F2A7471F50ABD80083C889 /* FeedVC.swift */,
+				05D480611F63DD4700E16E6D /* ProfileConfigVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				05F2A7431F5081170083C889 /* FancyField.swift */,
 				05F2A7451F5082020083C889 /* FancyBtn.swift */,
 				0544408C1F52B8730023A383 /* CircleView.swift */,
+				057B10C91F64072C0054BCAB /* ListView.swift */,
 				0544408E1F52D0F60023A383 /* PostCellTableViewCell.swift */,
 			);
 			name = View;
@@ -417,6 +423,8 @@
 			files = (
 				05569AE71F5C7001000147B0 /* IQUIView+Hierarchy.swift in Sources */,
 				0544408D1F52B8730023A383 /* CircleView.swift in Sources */,
+				057B10CA1F64072C0054BCAB /* ListView.swift in Sources */,
+				05D480621F63DD4700E16E6D /* ProfileConfigVC.swift in Sources */,
 				05569AED1F5C7001000147B0 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				05F2A7441F5081170083C889 /* FancyField.swift in Sources */,
 				05569AE91F5C7001000147B0 /* IQUIWindow+Hierarchy.swift in Sources */,

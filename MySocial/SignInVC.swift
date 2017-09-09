@@ -18,6 +18,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var passwordField: FancyField!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -26,14 +27,14 @@ class SignInVC: UIViewController {
         return .lightContent
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            print("Fabian: id found in keychain")
-            performSegue(withIdentifier: "toFeedVC", sender: nil)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+//            print("Fabian: id found in keychain")
+//            performSegue(withIdentifier: "toFeedVC", sender: nil)
+//        }
+//    }
     
     @IBAction func facebookBtnPressed(_ sender: Any) {
         
@@ -76,9 +77,11 @@ class SignInVC: UIViewController {
                     print("FABIAN: Email User authenticated with Firebase")
                     if let user = user {
                         let userData = ["provider": user.providerID]
+                        self.isNewUser = false
                         self.completeSignIn(id: user.uid, userData: userData)
                     }
                 } else {
+                    self.isNewUser = true
                     Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
                             if error.debugDescription.contains("The password must be 6 characters long") {
@@ -108,11 +111,18 @@ class SignInVC: UIViewController {
         }
     }
 
+    var isNewUser = true
+    
     func completeSignIn(id: String, userData: Dictionary<String, String>) {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("FABIAN: Data saved to keychain... \(keychainResult)")
-        performSegue(withIdentifier: "toFeedVC", sender: nil)
+        
+        if isNewUser {
+            performSegue(withIdentifier: "toProfileConfigVC", sender: nil)
+        } else {
+            performSegue(withIdentifier: "toFeedVC", sender: nil)
+        }
     }
 }
 

@@ -18,6 +18,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 
     
     var posts = [Post]()
+    
+    var userProfileImgUrl: String = ""
 
     var imagePicker: UIImagePickerController!
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
@@ -34,13 +36,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker.delegate = self
         
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
-            //print(snapshot.value)
+            print("snapvalue: \(snapshot.children.allObjects)")
             
             self.posts = []
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
-                    print("snaap: \(snap)")
+                    print("snaap: \(snap.value)")
+                    
                     if let postDict = snap.value as? Dictionary<String, Any> {
                         let postId = snap.key
                         let post = Post(postId: postId, postData: postDict)
@@ -48,10 +51,45 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                     }
                 }
             }
-            self.tableView.reloadData()
+            self.getUserInfos()
+                        //self.tableView.reloadData()
         })
         
         
+        
+        
+
+        
+    }
+    
+    func getUserInfos() {
+        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
+            
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    //print("FABIAN snaap: \(snap)")
+                    if let postDict = snap.value as? Dictionary<String, Any> {
+                        //print("FABIAN: value \(snap.key)")
+                        for post in self.posts {
+                            if post.userId == snap.key {
+                                post.username = postDict["username"] as! String
+                                //print("FABIAN: \(postDict["username"])")
+                                post.userImgUrl = postDict["imageUrl"] as! String
+                                //print("test: \(post.username)")
+                            }
+                            
+                        }
+                    }
+                }
+                for post in self.posts {
+                    print("huhu: name \(post.username)")
+                    print("huhu: id \(post.userId)")
+                    print("newcaption \(post.caption)")
+                }
+            }
+            
+            self.tableView.reloadData()
+        })
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,30 +97,61 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("count: \(posts.count)")
         return posts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let post = posts[indexPath.row]
-        print("FABIAN: \(post.caption)")
+        
+        print("test count: \(posts.count)")
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostCellTableViewCell {
             
+            //getUsersInfos(post: post)
+            var userImageCache: UIImage? = nil
+            
             if let userImg = ProfileConfigVC.imageCache.object(forKey: post.userImgUrl as NSString) {
-                print("FABIAN: profile image url \(post.userImgUrl)")
-                if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
-                    cell.configureCell(post: post, postPic: img, profilePic: userImg)
-                } else {
-                    cell.configureCell(post: post)
-                }
-                return cell
+                userImageCache = userImg
             }
             
+            //if let userImg = ProfileConfigVC.imageCache.object(forKey: post.userImgUrl as NSString) {
+                //print("FABIAN: profile image url \(post.userImgUrl)")
+                if let img = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
+                    cell.configureCell(post: post, postPic: img, profilePic: userImageCache)
+                //}
+            } else {
+                cell.configureCell(post: post)
+            }
+            return cell
         }
         
         return UITableViewCell()
     }
+    
+    // solution by me
+//    func getUsersInfos(post: Post) {
+//         
+//        // get username from user id
+//        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
+//            
+//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+//                for snap in snapshot {
+//                    //print("FABIAN snaap: \(snap)")
+//                    if let postDict = snap.value as? Dictionary<String, Any> {
+//                        //print("FABIAN: value \(snap.key)")
+//                        if post.userId == snap.key {
+//                            //print("FABIAN: \(postDict["username"])")
+//                            self.userProfileImgUrl = postDict["imageUrl"] as! String
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        })
+//
+//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {

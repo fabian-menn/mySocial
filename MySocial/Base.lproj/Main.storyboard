@@ -292,7 +292,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63V-jN-r9b">
                                                                     <rect key="frame" x="0.0" y="0.0" width="272" height="60"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="fbP-Zd-rSq" customClass="CircleView" customModule="MySocial" customModuleProvider="target">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank" translatesAutoresizingMaskIntoConstraints="NO" id="fbP-Zd-rSq" customClass="CircleView" customModule="MySocial" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="60" id="Lnn-Kq-hJD"/>
@@ -479,11 +479,11 @@
     <resources>
         <image name="add-image" width="88" height="88"/>
         <image name="add-post" width="88" height="88"/>
+        <image name="blank" width="1278" height="990"/>
         <image name="connect" width="512" height="512"/>
         <image name="f" width="352" height="328"/>
         <image name="like-unfilled" width="128" height="128"/>
         <image name="placeholder updated" width="464" height="279"/>
-        <image name="profile" width="113" height="155"/>
         <image name="right-arrow" width="128" height="128"/>
         <image name="sign-out" width="128" height="128"/>
         <image name="user" width="512" height="512"/>

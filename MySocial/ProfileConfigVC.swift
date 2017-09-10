@@ -80,14 +80,13 @@ class ProfileConfigVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     }
     
     func postToFirebase(imgUrl: String) {
-        let user: Dictionary<String, Any> = ["username": nameField.text, "imageUrl": imgUrl]
+        //let user: Dictionary<String, Any> = ["username": nameField.text, "imageUrl": imgUrl]
         
-        let firebasePost = DataService.ds.REF_USER.child()
-        firebasePost.setValue(user)
-      sd  imageSelected = false
-        
-dsfdsfdfusernameRef = DataService.ds.REF_USER_CURRENT.child("username")
-        self.usernameRef.setValue(nameField.text!)
+//        let firebasePost = DataService.ds.REF_USER.child()
+//        firebasePost.setValue(user)
+        imageUrlRef = DataService.ds.REF_USER_CURRENT.child("imageUrl")
+        imageUrlRef.setValue(imgUrl)
+        imageSelected = false
         
         usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
         self.usernameRef.setValue(nameField.text!)

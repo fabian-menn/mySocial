@@ -13,6 +13,7 @@ class Post {
     
     private var _caption: String!
     private var _userId: String!
+    private var _username: String!
     private var _userImgUrl: String!
     private var _imageUrl: String!
     private var _likes: Int!
@@ -27,8 +28,22 @@ class Post {
         return _userId
     }
     
+    var username: String {
+        set {
+            _username = newValue
+        }
+        get{
+            return _username
+        }
+    }
+    
     var userImgUrl: String {
-        return _userImgUrl
+        set {
+            _userImgUrl = newValue
+        }
+        get {
+            return _userImgUrl
+        }
     }
     
     var imageUrl: String {
@@ -44,13 +59,13 @@ class Post {
     }
     
     // creating new post
-    init(caption: String, userid: String, userImgUrl: String, imageUrl: String, likes: Int) {
-        self._caption = caption
-        self._imageUrl = imageUrl
-        self._likes = likes
-        self._userId = userid
-        self._userImgUrl = userImgUrl
-    }
+//    init(caption: String, userid: String, userImgUrl: String, imageUrl: String, likes: Int) {
+//        self._caption = caption
+//        self._imageUrl = imageUrl
+//        self._likes = likes
+//        self._userId = userid
+//        self._userImgUrl = userImgUrl
+//    }
     
     // getting old post
     init(postId: String, postData: Dictionary<String, Any>) {
@@ -64,9 +79,10 @@ class Post {
             self._userId = userId
         }
         
-        if let userImgUrl = postData["userImgUrl"] as? String {
-            self._userImgUrl = userImgUrl
-        }
+        //redundant bc user id should be enough
+//        if let userImgUrl = postData["userImgUrl"] as? String {
+//            self._userImgUrl = userImgUrl
+//        }
         
         if let imageUrl = postData["imageUrl"] as? String{
             self._imageUrl = imageUrl

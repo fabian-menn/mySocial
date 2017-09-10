@@ -34,11 +34,14 @@ class PostCellTableViewCell: UITableViewCell {
     }
     
     func configureCell(post: Post, postPic: UIImage? = nil, profilePic: UIImage? = nil) {
+        profileImg.image = UIImage(named: "blank")
+        postImg.image = UIImage(named: "placeholder")
         self.post = post
         likesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postId)
-        usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
-        self.caption.text = post.caption
+        //usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+        self.caption.text = self.post.caption
         self.likesLbl.text = "\(post.likes)"
+        print("configure: cap \(post.caption)")
         
         // get post images
         if postPic != nil {
@@ -61,6 +64,26 @@ class PostCellTableViewCell: UITableViewCell {
             
         }
         
+        if profilePic != nil {
+            self.profileImg.image = profilePic
+        } else {
+            let ref = Storage.storage().reference(forURL: post.userImgUrl)
+            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                if error != nil {
+                    print("FABIAN: Unable to download image from firebase storage")
+                } else {
+                    print("FABIAN: Image downloaded from storage")
+                    if let imgData = data {
+                        if let img = UIImage(data: imgData) {
+                            self.profileImg.image = img
+                            ProfileConfigVC.imageCache.setObject(img, forKey: post.userImgUrl as NSString)
+                        }
+                    }
+                }
+            })
+            
+        }
+        
         
         // whether user already liked it or not
         likesRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -71,26 +94,33 @@ class PostCellTableViewCell: UITableViewCell {
             }
         })
         
+        usernameLbl.text = post.username
+        
         
         // get username from user id
-        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
-            
-            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshot {
-                    //print("FABIAN snaap: \(snap)")
-                    if let postDict = snap.value as? Dictionary<String, Any> {
-                        //print("FABIAN: value \(snap.key)")
-                        if post.userId == snap.key {
-                            self.usernameLbl.text = postDict["username"] as! String
-                            //print("FABIAN: \(postDict["username"])")
-                            self.profileImgUrl = postDict["imageUrl"] as! String
-                        }
-                        
-                    }
-                }
-            }
-        })
-        
+//        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
+//            
+//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+//                for snap in snapshot {
+//                    //print("FABIAN snaap: \(snap)")
+//                    if let postDict = snap.value as? Dictionary<String, Any> {
+//                        //print("FABIAN: value \(snap.key)")
+//                        if post.userId == snap.key {
+//                            self.usernameLbl.text = postDict["username"] as! String
+//                            //print("FABIAN: \(postDict["username"])")
+//                            self.profileImgUrl = postDict["imageUrl"] as! String
+//                            self.getProfileImg(profilePic: profilePic)
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        })
+    
+
+    }
+    
+    func getProfileImg(profilePic: UIImage? = nil) {
         // get profile img
         if profilePic != nil {
             self.profileImg.image = profilePic
@@ -104,14 +134,13 @@ class PostCellTableViewCell: UITableViewCell {
                     if let imgData = data {
                         if let img = UIImage(data: imgData) {
                             self.profileImg.image = img
-                            ProfileConfigVC.imageCache.setObject(img, forKey: profileImgUrl as NSString)
+                            ProfileConfigVC.imageCache.setObject(img, forKey: self.profileImgUrl as NSString)
                         }
                     }
                 }
             })
             
         }
-
     }
     
     func likeTapped(sender: UITapGestureRecognizer) {
